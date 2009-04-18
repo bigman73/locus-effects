@@ -1,0 +1,27 @@
+24/12/2005 - 1.0.3.0
+Added: AnimatedImage locus effect
+Improved: Documentation
+
+18/7/2005 - 1.0.2.0
+Added: Example - Search state in map
+Added: Text effects
+Added: Movement mode (See Robin Hood arrow, Bulb in Demo)
+Added: FramesPerSecond property
+Added: Component toolbox bitmap
+Fixed: Major Performance boost - 
+	* DIBSection is used as back bitmap is instead of a regular Bitmap. This provides much better performance and allows future enhancements (filters, etc.).
+	* Variable back bitmap size logic is used instead of a big static back bitmap
+Fixed: Behavior - animations are smoother, thread sleep is now calculated dynamically. 
+       Animation thread pump is now using FramesPerSecond logic and allows a variable sleep time.
+Fixed: LayeredWindow got activated when it was clicked. Now it is transparent to clicks.
+Fixed: Effect was not stopped when another window was activated
+
+7/7/2005 - 1.0.1.0
+Fixed: Effects were not shown on non primary monitors in a multiple monitor configuration
+Fixed: Dynamically handle changes in monitor positions & resolutions
+Changed: Demo application layout changed
+Changed: Search example in demo application uses selected Locus Effect
+Changed: Memory allocation - Back bitmap is allocated just-in-time and disposed when effect stops
+
+3/7/2005 - 1.0.0.0
+Initial
