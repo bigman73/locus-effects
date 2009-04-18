@@ -429,9 +429,8 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
 		private void InternalStopActiveLocusEffect()
 		{
-			// Stop active (currently animating) effect
-			if ( m_activeEffect != null &&
-				 m_activeEffect.IsAnimating )
+			// Stop active effect
+			if ( m_activeEffect != null )
 			{
 				m_activeEffect.StopEffect() ;
 			}
