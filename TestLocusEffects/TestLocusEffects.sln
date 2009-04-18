@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLocusEffects", "TestLoc
 		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C} = {B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}
 	EndProjectSection
 EndProject
-Global	
+Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
 		Release = Release
