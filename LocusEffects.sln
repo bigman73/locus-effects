@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLocusEffects", "TestLocusEffects\TestLocusEffects.csproj", "{A90FD769-746C-4024-8566-4D60DDE17150}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C} = {B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocusEffects", "LocusEffects\LocusEffects.csproj", "{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A90FD769-746C-4024-8566-4D60DDE17150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90FD769-746C-4024-8566-4D60DDE17150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90FD769-746C-4024-8566-4D60DDE17150}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90FD769-746C-4024-8566-4D60DDE17150}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

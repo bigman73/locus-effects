@@ -28,63 +28,59 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Drawing ;
-using System.Collections ;
-using System.ComponentModel ;
-using System.Windows.Forms ;
-using System.Resources ;
-using System.Reflection ;
-
-using BigMansStuff.Common ;
+using System;
+using System.Drawing;
+using System.ComponentModel;
+using System.Windows.Forms;
+using BigMansStuff.Common;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
-	/// BaseBitmapEffect -
-	///		An effect that handles constant bitmaps
-	/// </summary>
-	public abstract class BaseBitmapEffect: BaseStandardEffect
-	{
-		#region Constructors
+    /// <summary>
+    /// BaseBitmapEffect -
+    ///		An effect that handles constant bitmaps
+    /// </summary>
+    public abstract class BaseBitmapEffect : BaseStandardEffect
+    {
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseBitmapEffect"/> class.
         /// </summary>
-		public BaseBitmapEffect()
-		{
-			m_anchoringMode = AnchoringMode.Center ;
-		}
+        public BaseBitmapEffect()
+        {
+            m_anchoringMode = AnchoringMode.Center;
+        }
 
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
 
         /// <summary>
         /// Bitmap used in effect
         /// </summary>
-		public Bitmap Bitmap
-		{
-			get
-			{
-				return m_bitmap ;
-			}
-			set
-			{
-				if ( m_bitmap == value )
-					return ;
-				m_bitmap = value ;
-			}
-		}
-  
-		#endregion
+        public Bitmap Bitmap
+        {
+            get
+            {
+                return m_bitmap;
+            }
+            set
+            {
+                if ( m_bitmap == value )
+                    return;
+                m_bitmap = value;
+            }
+        }
 
-		#region Protected Members
-		
-		protected Bitmap m_bitmap = null ;
-		
-		#endregion
-	}
+        #endregion
+
+        #region Protected Members
+
+        protected Bitmap m_bitmap = null;
+
+        #endregion
+    }
 }
 

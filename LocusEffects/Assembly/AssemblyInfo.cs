@@ -32,16 +32,14 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 [assembly: AssemblyTitle("Locus Effects")]
-[assembly: AssemblyDescription("Locus Effects")]
+[assembly: AssemblyDescription( "Locus Effects - .NET/C# visual effects framework for changing the user's locus of attention to an area on the screen" )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BigMan's Stuff")]
 [assembly: AssemblyProduct("Locus Effects")]
-[assembly: AssemblyCopyright("© 2005 Yuval Naveh")]
+[assembly: AssemblyCopyright("© 2006 Yuval Naveh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
-[assembly: AssemblyVersion("1.0.3.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
 
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyKeyFile("..\\..\\Assembly\\LocusEffects.snk")]
-[assembly: AssemblyKeyName("LocusEffects")]

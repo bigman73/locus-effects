@@ -28,72 +28,69 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Drawing ;
-using System.Collections ;
-using System.ComponentModel ;
-using System.Windows.Forms ;
-using System.Resources ;
-using System.Reflection ;
+using System;
+using System.Drawing;
+using System.Resources;
+using System.Reflection;
 
-using BigMansStuff.Common ;
+using BigMansStuff.Common;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
-	/// ArrowLocusEffect -
-	///		A predefined arrow Locus Effect
-	/// </summary>
-	public class ArrowLocusEffect: BaseBitmapEffect
-	{
-		#region Constructors
+    /// <summary>
+    /// ArrowLocusEffect -
+    ///		A predefined arrow Locus Effect
+    /// </summary>
+    public class ArrowLocusEffect : BaseBitmapEffect
+    {
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ArrowLocusEffect"/> class.
         /// </summary>
-		public ArrowLocusEffect()
-		{
-			m_anchoringMode = AnchoringMode.AutoCorner ;
-		}
+        public ArrowLocusEffect()
+        {
+            m_anchoringMode = AnchoringMode.AutoCorner;
+        }
 
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         /// <summary>
         /// Sets the initial run time data.
         /// </summary>
-		protected override void SetInitialRunTimeData()
-		{
+        protected override void SetInitialRunTimeData()
+        {
             // Load default bitmap
-			if ( m_defaultBitmap == null )
-			{
-				// Load arrow bitmap just in time
-				// Note: Default arrow orientation is SW			
-				ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.Arrow.ArrowLocusEffect_Images", Assembly.GetExecutingAssembly() ) ;
+            if ( m_defaultBitmap == null )
+            {
+                // Load arrow bitmap just in time
+                // Note: Default arrow orientation is SW			
+                ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.Arrow.ArrowLocusEffect_Images", Assembly.GetExecutingAssembly() );
 
-				m_defaultBitmap = rm.GetObject( "DefaultArrowBitmap" ) as Bitmap ;
-			}
+                m_defaultBitmap = rm.GetObject( "DefaultArrowBitmap" ) as Bitmap;
+            }
 
-			// Use default arrow bitmap, if nothing else was set by the user
-			if ( m_bitmap == null )
-			{
-				m_runTimeData.EffectBitmap = m_defaultBitmap.Clone() as Bitmap ;
-			}
-			// Use user defined arrow bitmap
-			else
-			{
-				m_runTimeData.EffectBitmap = m_bitmap.Clone() as Bitmap ;
-			}
-		}
+            // Use default arrow bitmap, if nothing else was set by the user
+            if ( m_bitmap == null )
+            {
+                m_runTimeData.EffectBitmap = m_defaultBitmap.Clone() as Bitmap;
+            }
+            // Use user defined arrow bitmap
+            else
+            {
+                m_runTimeData.EffectBitmap = m_bitmap.Clone() as Bitmap;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Private Members
+        #region Private Members
 
-		private static Bitmap m_defaultBitmap = null ;
+        private static Bitmap m_defaultBitmap = null;
 
-		#endregion
-	}
+        #endregion
+    }
 }

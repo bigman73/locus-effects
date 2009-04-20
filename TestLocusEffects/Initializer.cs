@@ -28,27 +28,28 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Windows.Forms ;
+using System;
+using System.Windows.Forms;
 
 namespace BigMansStuff.TestLocusEffects
 {
-	/// <summary>
-	/// Initializer -
-	///		Application initializer
-	/// </summary>
-	public class Initializer
-	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[ STAThread ]
-		static void Main() 
-		{
-			Application.EnableVisualStyles() ;
-			Application.DoEvents() ;
+    /// <summary>
+    /// Initializer -
+    ///		Application initializer
+    /// </summary>
+    public class Initializer
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault( false );
+            Application.DoEvents();
 
-			Application.Run( new MainForm() ) ;
-		}
-	}
+            Application.Run( new MainForm() );
+        }
+    }
 }

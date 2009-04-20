@@ -28,74 +28,71 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Drawing ;
-using System.Collections ;
-using System.ComponentModel ;
-using System.Windows.Forms ;
-using System.Resources ;
-using System.Reflection ;
-
-using BigMansStuff.Common ;
+using System;
+using System.Drawing;
+using System.ComponentModel;
+using System.Resources;
+using System.Reflection;
+using BigMansStuff.Common;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
-	/// BitmapLocusEffect -
-	///		A predefined bitmap Locus Effect
-	/// </summary>
-	public class BitmapLocusEffect: BaseBitmapEffect
-	{
-		#region Constructors
+    /// <summary>
+    /// BitmapLocusEffect -
+    ///		A predefined bitmap Locus Effect
+    /// </summary>
+    public class BitmapLocusEffect : BaseBitmapEffect
+    {
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BitmapLocusEffect"/> class.
         /// </summary>
-		public BitmapLocusEffect()
-		{
-			m_animationStartColor = Color.FromArgb( 0, 0, 200 ) ;
-			m_animationEndColor = Color.FromArgb( 0, 50, 255 ) ;
-		}
+        public BitmapLocusEffect()
+        {
+            m_animationStartColor = Color.FromArgb( 0, 0, 200 );
+            m_animationEndColor = Color.FromArgb( 0, 50, 255 );
+        }
 
 
-		#endregion
+        #endregion
 
-		#region Protected Methods
+        #region Protected Methods
 
         /// <summary>
         /// Sets the initial run time data.
         /// </summary>
-		protected override void SetInitialRunTimeData()
-		{
+        protected override void SetInitialRunTimeData()
+        {
             // Load default bitmap
-			if ( m_defaultBitmap == null )
-			{
-				// Load default bitmap just in time
-				// Note: Default arrow orientation is SW			
-				ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.Bitmap.BitmapLocusEffect_Images", Assembly.GetExecutingAssembly() ) ;
+            if ( m_defaultBitmap == null )
+            {
+                // Load default bitmap just in time
+                // Note: Default arrow orientation is SW			
+                ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.Bitmap.BitmapLocusEffect_Images", Assembly.GetExecutingAssembly() );
 
-				m_defaultBitmap = rm.GetObject( "DefaultBitmap" ) as Bitmap ;
-			}
+                m_defaultBitmap = rm.GetObject( "DefaultBitmap" ) as Bitmap;
+            }
 
-			// Use default bitmap, if nothing else was set by the user
-			if ( m_bitmap == null )
-			{
-				m_runTimeData.EffectBitmap = m_defaultBitmap.Clone() as Bitmap ;
-			}
-			// Use user defined bitmap
-			else
-			{
-				m_runTimeData.EffectBitmap = m_bitmap.Clone() as Bitmap ;
-			}
-		}
+            // Use default bitmap, if nothing else was set by the user
+            if ( m_bitmap == null )
+            {
+                m_runTimeData.EffectBitmap = m_defaultBitmap.Clone() as Bitmap;
+            }
+            // Use user defined bitmap
+            else
+            {
+                m_runTimeData.EffectBitmap = m_bitmap.Clone() as Bitmap;
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Private Members
+        #region Private Members
 
-		private static Bitmap m_defaultBitmap = null ;
+        private static Bitmap m_defaultBitmap = null;
 
-		#endregion
-	}
+        #endregion
+    }
 }
 

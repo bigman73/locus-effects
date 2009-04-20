@@ -1,0 +1,32 @@
+﻿<project schemaVersion="1.2">
+    <assemblies>
+        <assembly assemblyPath="..\bin\Release\BigMansStuff.LocusEffects.dll" xmlCommentsPath="..\xmldoc\LocusEffects.xmldoc" />
+    </assemblies>
+    <namespaceSummaries>
+        <namespaceSummaryItem name="" isDocumented="False" />
+    </namespaceSummaries>
+    <contentPlacement>AboveNamespaces</contentPlacement>
+    <projectSummary />
+    <sandcastlePath />
+    <hhcPath />
+    <hxcompPath />
+    <outputPath>.\doc\</outputPath>
+    <helpFileFormat>HtmlHelp1x</helpFileFormat>
+    <cleanIntermediates>False</cleanIntermediates>
+    <purgeDuplicateTopics>True</purgeDuplicateTopics>
+    <binaryTOC>True</binaryTOC>
+    <includeFavorites>False</includeFavorites>
+    <preliminary>False</preliminary>
+    <rootNSContainer>False</rootNSContainer>
+    <helpTitle>LocusEffects - Visual Effect Library for changing the user's locus of attention</helpTitle>
+    <htmlHelpName>LocusEffects</htmlHelpName>
+    <language>en-US</language>
+    <copyrightHref>http://www.codeproject.com/csharp/LocusEffects.asp</copyrightHref>
+    <copyrightText>© Copyright 2005, BigMan's Stuff - Yuval Naveh, Locus Effects</copyrightText>
+    <feedbackEMailAddress />
+    <headerText />
+    <projectLinks>Local</projectLinks>
+    <sdkLinks>Msdn</sdkLinks>
+    <documentAttributes>False</documentAttributes>
+    <documentInternals>True</documentInternals>
+</project>

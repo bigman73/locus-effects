@@ -28,18 +28,17 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Drawing ;
-
+using System;
+using System.Drawing;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
-	/// AnimatedImageFrame -
-	///     Data structure for holding data of a single image frame
-	/// </summary>
-	internal class AnimatedImageFrame: IDisposable
-	{
+    /// <summary>
+    /// AnimatedImageFrame -
+    ///     Data structure for holding data of a single image frame
+    /// </summary>
+    public class AnimatedImageFrame : IDisposable
+    {
         #region IDisposable Members
 
         /// <summary>
@@ -50,8 +49,8 @@ namespace BigMansStuff.LocusEffects
         {
             if ( m_bitmap != null )
             {
-                m_bitmap.Dispose() ;
-                m_bitmap = null ;
+                m_bitmap.Dispose();
+                m_bitmap = null;
             }
         }
 
@@ -66,13 +65,16 @@ namespace BigMansStuff.LocusEffects
         {
             get
             {
-                return m_duration ;
+                return m_duration;
             }
             set
             {
                 if ( m_duration == value )
-                    return ;
-                m_duration = value ;
+                {
+                    return;
+                }
+
+                m_duration = value;
             }
         }
 
@@ -84,13 +86,16 @@ namespace BigMansStuff.LocusEffects
         {
             get
             {
-                return m_bitmap ;
+                return m_bitmap;
             }
             set
             {
                 if ( m_bitmap == value )
-                    return ;
-                m_bitmap = value ;
+                {
+                    return;
+                }
+
+                m_bitmap = value;
             }
         }
 
@@ -102,20 +107,22 @@ namespace BigMansStuff.LocusEffects
         {
             get
             {
-                return m_index ;
+                return m_index;
             }
             set
             {
-                m_index = value ;
+                m_index = value;
             }
         }
 
         #endregion
-        
+
         #region Private members
-        private int m_duration ;
-        private Bitmap m_bitmap ;
+
+        private int m_duration;
+        private Bitmap m_bitmap;
         private int m_index;
+
         #endregion
     }
 }

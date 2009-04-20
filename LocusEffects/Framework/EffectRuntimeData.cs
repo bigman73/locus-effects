@@ -28,49 +28,56 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Windows.Forms ;
-using System.Drawing ;
-using BigMansStuff.Common ;
+using System;
+using System.Windows.Forms;
+using System.Drawing;
+using BigMansStuff.Common;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
-	/// EffectRuntimeData -
-	///		Runtime data of the effect when it is animating
-	/// </summary>
-	public class EffectRuntimeData
-	{
-		#region Constructors
-		public EffectRuntimeData()
-		{
-			StopRequested = false ;
-			IsAnimating = false ;
-			Opacity = InitialOpacity ;
-		}
-		#endregion
+    /// <summary>
+    /// EffectRuntimeData -
+    ///		Runtime data of the effect when it is animating
+    /// </summary>
+    public class EffectRuntimeData
+    {
+        #region Constructors
 
-		#region Public Fields
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:EffectRuntimeData"/> class.
+        /// </summary>
+        public EffectRuntimeData()
+        {
+            StopRequested = false;
+            IsAnimating = false;
+            Opacity = InitialOpacity;
+        }
 
-		/// <summary>
-		/// StopRequested is volatile since it is a thread control flag
-		/// </summary>
-		public volatile bool StopRequested = false ;
-		public Form ActivatorForm = null ;
-		public Rectangle LocusScreenBounds ;
-		public Rectangle LastActivatorFormBounds ;
-		public Bitmap EffectBitmap = null ;
-		public System.Threading.Thread AnimationThread = null ;
-		public bool IsAnimating = false ;
-		public int Opacity ; // %
-		public AnchoringCorner AnchoringCorner ;
-        public Point MovementOffset = Point.Empty ;
-        public float StepMaxDuration ; // msec
+        #endregion
 
-		#endregion
+        #region Public Fields
 
-		#region Constants
-		private const int InitialOpacity = 70 ; // %
-		#endregion
-	}
+        /// <summary>
+        /// StopRequested is volatile since it is a thread control flag
+        /// </summary>
+        public volatile bool StopRequested = false;
+        public Form ActivatorForm = null;
+        public Rectangle LocusScreenBounds;
+        public Rectangle LastActivatorFormBounds;
+        public Bitmap EffectBitmap = null;
+        public System.Threading.Thread AnimationThread = null;
+        public bool IsAnimating = false;
+        public int Opacity; // %
+        public AnchoringCorner AnchoringCorner;
+        public Point MovementOffset = Point.Empty;
+        public float StepMaxDuration; // msec
+
+        #endregion
+
+        #region Constants
+
+        private const int InitialOpacity = 70; // %
+
+        #endregion
+    }
 }

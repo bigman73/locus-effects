@@ -31,15 +31,15 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle("Locus Effects Test")]
-[assembly: AssemblyDescription("Locus Effects Test")]
+[assembly: AssemblyTitle( "TestLocusEffects" )]
+[assembly: AssemblyDescription("Locus Effects Tester Application")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BigMan's Stuff")]
 [assembly: AssemblyProduct("Locus Effects")]
-[assembly: AssemblyCopyright("© 2005 Yuval Naveh")]
+[assembly: AssemblyCopyright("© 2006 Yuval Naveh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
-[assembly: AssemblyVersion("1.0.3.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
 
 [assembly: AssemblyDelaySign(false)]

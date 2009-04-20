@@ -28,41 +28,40 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Collections ;
-using System.Drawing ;
-using System.Drawing.Drawing2D ;
-using System.Drawing.Imaging ;
-using System.Resources ;
-using System.Reflection ;
-using System.ComponentModel ;
-using System.Windows.Forms ;
-
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Resources;
+using System.Reflection;
 
 namespace BigMansStuff.LocusEffects
 {
-	/// <summary>
+    /// <summary>
     /// AnimatedImageLocusEffect -
     ///		A predefined locus effect for displaying an animated sequence of images
     ///	</summary>
-	public class AnimatedImageLocusEffect: BaseStandardEffect
-	{
+    public class AnimatedImageLocusEffect : BaseStandardEffect
+    {
         #region Constructors
         /// <summary>
         /// Default constructor
         /// </summary>
         public AnimatedImageLocusEffect()
         {
-            m_leadInTime = 1000 ;
-            m_animationTime = 1200 ;
-            m_leadOutTime = 1000 ;
-            m_anchoringMode = AnchoringMode.Center ;
-            m_showShadow = false ;
+            m_leadInTime = 1000;
+            m_animationTime = 1200;
+            m_leadOutTime = 1000;
+            m_anchoringMode = AnchoringMode.Center;
+            m_showShadow = false;
+            m_animationStartColor = Color.Transparent;
+            m_animationEndColor = Color.Transparent;
 
-            m_frameSequence = new ArrayList() ;
+            m_frameSequence = new List<AnimatedImageFrame>();
 
-            this.CreateDefaultImageSequence() ;
-		}
+            this.CreateDefaultImageSequence();
+        }
 
 
         #endregion
@@ -74,11 +73,11 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         public override void Dispose()
         {
-            base.Dispose() ;
+            base.Dispose();
 
             if ( m_frameSequence != null )
             {
-                this.DisposeFrames() ;
+                this.DisposeFrames();
             }
         }
 
@@ -93,11 +92,11 @@ namespace BigMansStuff.LocusEffects
             {
                 foreach ( AnimatedImageFrame frame in m_frameSequence )
                 {
-                    frame.Dispose() ;
+                    frame.Dispose();
                 }
 
-                m_frameSequence.Clear() ;
-                m_frameIndex = 0 ;
+                m_frameSequence.Clear();
+                m_frameIndex = 0;
             }
         }
 
@@ -110,7 +109,7 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         public void ClearAllFrames()
         {
-            this.DisposeFrames() ;
+            this.DisposeFrames();
         }
 
         /// <summary>
@@ -121,71 +120,73 @@ namespace BigMansStuff.LocusEffects
         {
             if ( image == null )
             {
-                throw new ArgumentNullException( "image" ) ;
+                throw new ArgumentNullException( "image" );
             }
 
             // Create a new FrameDimension object from this image
-            System.Drawing.Imaging.FrameDimension frameDimensions = new System.Drawing.Imaging.FrameDimension( image.FrameDimensionsList[ 0 ] ) ;
+            System.Drawing.Imaging.FrameDimension frameDimensions = new System.Drawing.Imaging.FrameDimension( image.FrameDimensionsList[ 0 ] );
 
-            int numberOfFrames = image.GetFrameCount( frameDimensions ) ;
+            int numberOfFrames = image.GetFrameCount( frameDimensions );
 
             // Check for valid image
             if ( numberOfFrames <= 0 )
             {
-                throw new ArgumentException( "Provided image has no frames", "image" ) ;
+                throw new ArgumentException( "Provided image has no frames", "image" );
             }
-                    
+
             // Get HasFrameDuration flag (PropertyTagFrameDelay) from source image
-            System.Drawing.Imaging.PropertyItem propertyItem = GetFrameDurationPropertyItem( image ) ;
-            bool hasFrameDuration = ( propertyItem != null ) ;
+            System.Drawing.Imaging.PropertyItem propertyItem = GetFrameDurationPropertyItem( image );
+            bool hasFrameDuration = ( propertyItem != null );
 
             // TODO: Check if there is a loop flag on
-            int frameDuration ;
+            int frameDuration;
 
             // Extract each frame in the image, and import into our animated frame sequence
-            for ( int frameIndex = 0 ; frameIndex < numberOfFrames ; frameIndex++ )
+            for ( int frameIndex = 0; frameIndex < numberOfFrames; frameIndex++ )
             {
                 // Select frame in source image by index
-                image.SelectActiveFrame( frameDimensions, frameIndex ) ;
+                image.SelectActiveFrame( frameDimensions, frameIndex );
 
                 if ( hasFrameDuration )
                 {
+                    int frameBase = frameIndex * 4;
                     // Get frame duration of the active frame
-                    frameDuration = 
-                        propertyItem.Value[ frameIndex * 4 ] +
-                        0x100 * propertyItem.Value[ frameIndex * 4 + 1 ] +
-                        0x10000 * propertyItem.Value[ frameIndex * 4 + 2 ] +
-                        0x1000000 * propertyItem.Value[ frameIndex * 4 + 3 ] ;
+                    frameDuration =
+                        propertyItem.Value[ frameBase ] +
+                        0x100 * propertyItem.Value[ frameBase + 1 ] +
+                        0x10000 * propertyItem.Value[ frameBase + 2 ] +
+                        0x1000000 * propertyItem.Value[ frameBase + 3 ];
                 }
                 else
                 {
                     // No frame duration
-                    frameDuration = 0 ;
+                    frameDuration = 0;
                 }
 
                 // Extract the active frame image into a memory stream, and make it a stand alone bitmap
-                Bitmap frameBitmap = null ;
-                System.IO.MemoryStream imageMemoryStream = new System.IO.MemoryStream() ;
+                Bitmap frameBitmap = null;
+                System.IO.MemoryStream imageMemoryStream = new System.IO.MemoryStream();
                 try
                 {
-                    image.Save( imageMemoryStream, System.Drawing.Imaging.ImageFormat.Png ) ; 
- 
-                    frameBitmap = new Bitmap( imageMemoryStream ) ;
+                    image.Save( imageMemoryStream, System.Drawing.Imaging.ImageFormat.Png );
+
+                    frameBitmap = new Bitmap( imageMemoryStream );
                 }
                 finally
                 {
-                    imageMemoryStream.Close() ;
+                    imageMemoryStream.Close();
+                    imageMemoryStream.Dispose();
                 }
 
                 // Create a new animated image frame
-                AnimatedImageFrame imageFrame = new AnimatedImageFrame() ;
+                AnimatedImageFrame imageFrame = new AnimatedImageFrame();
                 // Set its properties
-                imageFrame.Duration = frameDuration ;
-                imageFrame.Bitmap = frameBitmap ;
-                imageFrame.Index = frameIndex ;
+                imageFrame.Duration = frameDuration;
+                imageFrame.Bitmap = frameBitmap;
+                imageFrame.Index = frameIndex;
 
                 // Add it to the frame sequence
-                m_frameSequence.Add( imageFrame ) ;
+                m_frameSequence.Add( imageFrame );
             }
         }
 
@@ -204,70 +205,71 @@ namespace BigMansStuff.LocusEffects
             {
                 if ( m_frameSequence.Count <= 0 )
                 {
-                    return m_defaultFocusPoint ;
+                    return m_defaultFocusPoint;
                 }
 
-                return m_focusPoint ;
+                return m_focusPoint;
             }
             set
             {
                 if ( m_focusPoint == value )
-                    return ;
-                m_focusPoint = value ;
+                {
+                    return;
+                }
+
+                m_focusPoint = value;
             }
         }
 
         #endregion
-                   
+
         #region Protected methods
 
         /// <summary>
         /// Creates the default image sequence.
         /// </summary>
         protected virtual void CreateDefaultImageSequence()
-        {       
+        {
             // Load default bitmap
-            // TODO: Move default animated image to AnimatedImageLocusEffect
             if ( m_defaultAnimatedImage == null )
             {
-                m_defaultFrameSequence = new ArrayList() ;    
-                
+                m_defaultFrameSequence = new List<AnimatedImageFrame>();
+
                 // Load default bitmap just in time
                 // Note: Default arrow orientation is SW			
-                ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.AnimatedImage.AnimatedImageLocusEffect_Images", Assembly.GetExecutingAssembly() ) ;
-                m_defaultAnimatedImage = rm.GetObject( "DefaultAnimatedImage" ) as Image ;
+                ResourceManager rm = new ResourceManager( "BigMansStuff.LocusEffects.Effects.AnimatedImage.AnimatedImageLocusEffect_Images", Assembly.GetExecutingAssembly() );
+                m_defaultAnimatedImage = rm.GetObject( "DefaultAnimatedImage" ) as Image;
 
                 // Add all frames from default animated image
                 if ( m_defaultAnimatedImage != null )
                 {
                     this.AddImageFrames( m_defaultAnimatedImage );
 
-                    m_focusPoint = new Point( -30, 0 ) ;
+                    m_focusPoint = DefaultFocusPoint;
                 }
             }
         }
-
 
         /// <summary>
         /// Provies standard animation sequence logic - lead in, body, lead out
         /// </summary>
         protected override void AnimateEffect()
         {
-            Size bitmapSize = ( FrameSequence[ 0 ] as AnimatedImageFrame ).Bitmap.Size ;
+            Size bitmapSize = FrameSequence[ 0 ].Bitmap.Size;
 
-            base.m_runTimeData.EffectBitmap = new Bitmap( bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppArgb ) ;
+            base.m_runTimeData.EffectBitmap = new Bitmap( bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppArgb );
             m_remainingAnimationLoops = m_animationLoops - 1;
             m_frameIndex = 0;
-            
+
             using ( System.Drawing.Graphics g = Graphics.FromImage( base.m_runTimeData.EffectBitmap ) )
             {
-                g.CompositingMode = CompositingMode.SourceCopy ;
-                g.SmoothingMode = SmoothingMode.HighQuality ;
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.SmoothingMode = SmoothingMode.HighQuality;
 
-                g.Clear( Color.Transparent ) ;
+                g.Clear( Color.Transparent );
             }
 
-            base.AnimateEffect() ;
+            base.AnimateEffect();
         }
 
         /// <summary>
@@ -276,12 +278,12 @@ namespace BigMansStuff.LocusEffects
         /// <param name="graphics"></param>
         protected override void PaintLeadIn( Graphics graphics )
         {
-            base.PaintLeadIn( graphics ) ;
-            
-            PaintImageFrame() ;
+            base.PaintLeadIn( graphics );
+
+            PaintImageFrame();
 
             // TODO: Refactor FadeIn/FadeOut logic to base class (Standard effect)
-            m_runTimeData.Opacity = ( int ) ( m_initialOpacity * ( m_animationStep ) / 100 ) ; 
+            m_runTimeData.Opacity = ( int ) ( m_initialOpacity * ( m_animationStep ) / 100 );
         }
 
         /// <summary>
@@ -290,13 +292,12 @@ namespace BigMansStuff.LocusEffects
         /// <param name="graphics"></param>
         protected override void PaintBodyAnimation( Graphics graphics )
         {
-            base.PaintBodyAnimation( graphics ) ;
+            base.PaintBodyAnimation( graphics );
 
             PaintImageFrame();
 
-            m_runTimeData.Opacity = m_initialOpacity ;
+            m_runTimeData.Opacity = m_initialOpacity;
         }
-
 
         /// <summary>
         /// Paint animation for lead out step
@@ -304,46 +305,44 @@ namespace BigMansStuff.LocusEffects
         /// <param name="graphics"></param>
         protected override void PaintLeadOut( Graphics graphics )
         {
-            base.PaintLeadOut( graphics ) ;
+            base.PaintLeadOut( graphics );
 
-            PaintImageFrame() ;
+            PaintImageFrame();
 
-            m_runTimeData.Opacity = ( int ) ( m_initialOpacity * ( 100 - m_animationStep ) / 100 ) ; 
+            m_runTimeData.Opacity = ( int ) ( m_initialOpacity * ( 100 - m_animationStep ) / 100 );
         }
-
 
         /// <summary>
         /// Paints the image frame.
         /// </summary>
         protected void PaintImageFrame()
         {
-            Size bitmapSize = ( FrameSequence[ m_frameIndex ] as AnimatedImageFrame ).Bitmap.Size ;
+            // Get current frame bitmap
+            AnimatedImageFrame imageFrame = FrameSequence[ m_frameIndex ];
+            Size bitmapSize = imageFrame.Bitmap.Size;
 
-            Bitmap bitmap = new Bitmap( bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppArgb ) ;
+            Bitmap bitmap = new Bitmap( bitmapSize.Width, bitmapSize.Height, PixelFormat.Format32bppArgb );
 
             using ( System.Drawing.Graphics g = Graphics.FromImage( bitmap ) )
             {
-                g.CompositingMode = CompositingMode.SourceCopy ;
-                g.SmoothingMode = SmoothingMode.HighQuality ;
+                g.CompositingMode = CompositingMode.SourceCopy;
+                g.SmoothingMode = SmoothingMode.HighQuality;
 
-                // Get current frame bitmap
-                AnimatedImageFrame imageFrame = FrameSequence[ m_frameIndex ] as AnimatedImageFrame ;
-                
                 // Draw current frame bitmap
-                g.DrawImageUnscaled( imageFrame.Bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height ) ;
+                g.DrawImageUnscaled( imageFrame.Bitmap, 0, 0, bitmapSize.Width, bitmapSize.Height );
 
                 // Advance to next frame
-                IncrementFrameIndex() ;
+                IncrementFrameIndex();
 
                 if ( m_runTimeData.EffectBitmap != null )
                 {
-                    m_runTimeData.EffectBitmap.Dispose() ;
-                    m_runTimeData.EffectBitmap = null ;
+                    m_runTimeData.EffectBitmap.Dispose();
+                    m_runTimeData.EffectBitmap = null;
                 }
             }
 
-            m_runTimeData.EffectBitmap = bitmap ;
-            m_runTimeData.MovementOffset = FocusPoint ;
+            m_runTimeData.EffectBitmap = bitmap;
+            m_runTimeData.MovementOffset = FocusPoint;
         }
 
         /// <summary>
@@ -353,12 +352,12 @@ namespace BigMansStuff.LocusEffects
         /// <returns></returns>
         private System.Drawing.Imaging.PropertyItem GetFrameDurationPropertyItem( Image image )
         {
-            System.Drawing.Imaging.PropertyItem propertyItem = null ;
-            ArrayList propertyIds = new ArrayList( image.PropertyIdList ) ;
-           
+            System.Drawing.Imaging.PropertyItem propertyItem = null;
+            List<int> propertyIds = new List<int>( image.PropertyIdList );
+
             if ( propertyIds.IndexOf( PropertyTagFrameDelay ) >= 0 )
             {
-                propertyItem = image.GetPropertyItem( PropertyTagFrameDelay ) ;
+                propertyItem = image.GetPropertyItem( PropertyTagFrameDelay );
             }
 
             return propertyItem;
@@ -369,24 +368,24 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         protected void IncrementFrameIndex()
         {
-            m_frameIndex++ ;
-            
+            m_frameIndex++;
+
             if ( m_frameIndex >= FrameSequence.Count )
             {
                 if ( m_animationLoops <= 0 )
                 {
-                    m_frameIndex = 0 ;
+                    m_frameIndex = 0;
                 }
                 else
                 {
                     if ( m_remainingAnimationLoops > 0 )
                     {
-                        m_frameIndex = 0 ;
-                        m_remainingAnimationLoops-- ;
+                        m_frameIndex = 0;
+                        m_remainingAnimationLoops--;
                     }
                     else
                     {
-                        m_frameIndex = FrameSequence.Count - 1 ;
+                        m_frameIndex = FrameSequence.Count - 1;
                     }
                 }
             }
@@ -396,19 +395,21 @@ namespace BigMansStuff.LocusEffects
         #endregion
 
         #region Protected properties
-        
+
         /// <summary>
         /// Gets the frame sequence.
         /// </summary>
         /// <value>The frame sequence.</value>
-        protected ArrayList FrameSequence
+        protected List<AnimatedImageFrame> FrameSequence
         {
             get
             {
                 if ( m_frameSequence.Count <= 0 )
-                    return m_defaultFrameSequence ;
+                {
+                    return m_defaultFrameSequence;
+                }
 
-                return m_frameSequence ;
+                return m_frameSequence;
             }
         }
 
@@ -435,24 +436,27 @@ namespace BigMansStuff.LocusEffects
 
         #region Protected members
 
-        protected ArrayList m_frameSequence = null ;
-        protected int m_frameIndex = 0 ;
+        protected List<AnimatedImageFrame> m_frameSequence = null;
+        protected int m_frameIndex = 0;
         protected int m_animationLoops = 0;
         /// <summary>
         /// Runtime data
         /// </summary>
         protected int m_remainingAnimationLoops = 0;
 
-        protected Point m_focusPoint = Point.Empty ;
-        protected Point m_defaultFocusPoint = Point.Empty ;
-                
-        protected static ArrayList m_defaultFrameSequence ;
-        protected static Image m_defaultAnimatedImage = null ;
+        protected Point m_focusPoint = Point.Empty;
+        protected Point m_defaultFocusPoint = Point.Empty;
+
+        protected static List<AnimatedImageFrame> m_defaultFrameSequence;
+        protected static Image m_defaultAnimatedImage = null;
 
         #endregion
 
         #region Constants
-        protected const int PropertyTagFrameDelay = 0x5100 ;
+
+        protected const int PropertyTagFrameDelay = 0x5100;
+        protected readonly Point DefaultFocusPoint = new Point( -30, 0 );
+
         #endregion
-	}
+    }
 }

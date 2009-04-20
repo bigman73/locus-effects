@@ -28,16 +28,16 @@
 // EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endregion
 
-using System ;
-using System.Drawing ;
-using System.Drawing.Drawing2D ;
-using System.Collections ;
-using System.ComponentModel ;
-using System.Windows.Forms ;
-using System.Resources ;
-using System.Reflection ;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Resources;
+using System.Reflection;
 
-using BigMansStuff.Common ;
+using BigMansStuff.Common;
 
 namespace BigMansStuff.LocusEffects
 {
@@ -45,7 +45,7 @@ namespace BigMansStuff.LocusEffects
     /// TextLocusEffect -
     ///		A predefined text Locus Effect
     /// </summary>
-    public class TextLocusEffect: BaseBitmapEffect
+    public class TextLocusEffect : BaseBitmapEffect
     {
         #region Constructors
 
@@ -54,20 +54,21 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         public TextLocusEffect()
         {
-            m_animationStartColor = Color.Yellow ;
-            m_animationEndColor = Color.Indigo ;
-            m_leadInTime = 500 ;
-            m_animationTime = 100 ;
-            m_leadOutTime = 500 ;
-            m_font = new Font( "Arial", 50 ) ;
-            m_text = "Test" ;
-            m_shadowOffset = new Point( 1, 1 ) ;           
+            m_animationStartColor = Color.Yellow;
+            m_animationEndColor = Color.Indigo;
+            m_leadInTime = 500;
+            m_animationTime = 100;
+            m_leadOutTime = 500;
+            m_font = new Font( "Arial", 50 );
+            m_text = "Test";
+            m_shadowOffset = new Point( 1, 1 );
         }
 
 
         #endregion
 
         #region Dispose
+
         /// <summary>
         /// Disposes this instance.
         /// </summary>
@@ -75,10 +76,11 @@ namespace BigMansStuff.LocusEffects
         {
             if ( m_font != null )
             {
-                m_font.Dispose() ;
-                m_font = null ;
+                m_font.Dispose();
+                m_font = null;
             }
-            base.Dispose() ;
+
+            base.Dispose();
         }
         #endregion
 
@@ -107,19 +109,18 @@ namespace BigMansStuff.LocusEffects
         {
             get
             {
-                return m_font ;
+                return m_font;
             }
             set
             {
                 if ( m_font != null )
                 {
-                    m_font.Dispose() ;
+                    m_font.Dispose();
                 }
 
-                m_font = value.Clone() as Font ;
+                m_font = value.Clone() as Font;
             }
         }
-
 
         /// <summary>
         /// Gets or sets the rotation angle.
@@ -129,13 +130,13 @@ namespace BigMansStuff.LocusEffects
         {
             get
             {
-                return m_rotationAngle ;
+                return m_rotationAngle;
             }
             set
             {
                 if ( m_rotationAngle != value )
                 {
-                    m_rotationAngle = value ;
+                    m_rotationAngle = value;
                 }
             }
         }
@@ -151,41 +152,41 @@ namespace BigMansStuff.LocusEffects
         {
             if ( m_bitmap == null )
             {
-                SizeF textBounds ;
-                Bitmap textBitmap = new Bitmap( 1, 1 ) ;
+                SizeF textBounds;
+                Bitmap textBitmap = new Bitmap( 1, 1 );
                 using ( Graphics textGraphics = Graphics.FromImage( textBitmap ) )
                 {
                     using ( StringFormat stringFormat = new StringFormat() )
                     {
-                        stringFormat.LineAlignment = StringAlignment.Center ;
-                        stringFormat.Alignment = StringAlignment.Center ;
-                        
-                        textBounds = textGraphics.MeasureString( m_text, m_font, MaxTextWidth, stringFormat ) ;
-                    }                   
+                        stringFormat.LineAlignment = StringAlignment.Center;
+                        stringFormat.Alignment = StringAlignment.Center;
+
+                        textBounds = textGraphics.MeasureString( m_text, m_font, MaxTextWidth, stringFormat );
+                    }
                 }
 
                 // Create bitmap from text
-                textBitmap.Dispose() ;
-                textBitmap = new Bitmap( textBounds.ToSize().Width, textBounds.ToSize().Height ) ;
+                textBitmap.Dispose();
+                textBitmap = new Bitmap( textBounds.ToSize().Width, textBounds.ToSize().Height );
                 using ( Graphics textGraphics = Graphics.FromImage( textBitmap ) )
                 {
                     using ( StringFormat stringFormat = new StringFormat() )
                     {
-                        stringFormat.LineAlignment = StringAlignment.Center ;
-                        stringFormat.Alignment = StringAlignment.Center ;
-                        
-                        textGraphics.DrawString( m_text, m_font, Brushes.Black, textBitmap.Width / 2, textBitmap.Height / 2, stringFormat ) ;
-                    }                   
+                        stringFormat.LineAlignment = StringAlignment.Center;
+                        stringFormat.Alignment = StringAlignment.Center;
+
+                        textGraphics.DrawString( m_text, m_font, Brushes.Black, textBitmap.Width / 2, textBitmap.Height / 2, stringFormat );
+                    }
                 }
 
                 if ( Math.Abs( m_rotationAngle ) > EpsilonAngle )
                 {
-                    Bitmap rotatedBitmap = BitmapUtilities.RotateImage( textBitmap, m_rotationAngle ) ;
-                    textBitmap.Dispose() ;
-                    textBitmap = rotatedBitmap ;
+                    Bitmap rotatedBitmap = BitmapUtilities.RotateImage( textBitmap, m_rotationAngle );
+                    textBitmap.Dispose();
+                    textBitmap = rotatedBitmap;
                 }
 
-                m_runTimeData.EffectBitmap = textBitmap ;
+                m_runTimeData.EffectBitmap = textBitmap;
             }
         }
 
@@ -193,15 +194,17 @@ namespace BigMansStuff.LocusEffects
 
         #region Protected Members
 
-        protected string m_text ;
-        protected Font m_font ;
-        protected float m_rotationAngle = 0 ; // degrees
+        protected string m_text;
+        protected Font m_font;
+        protected float m_rotationAngle = 0; // degrees
 
         #endregion
 
         #region Constants
+
         private const int MaxTextWidth = 5000;
         private const float EpsilonAngle = 0.1f;
+
         #endregion
     }
 }

@@ -29,24 +29,24 @@
 #endregion
 
 using System;
-using System.Diagnostics ;
+using System.Diagnostics;
 
 namespace BigMansStuff.Common
 {
-	/// <summary>
-	/// CommonData
-	/// </summary>
-	internal class CommonData
-	{
-		#region Constructors
+    /// <summary>
+    /// CommonData
+    /// </summary>
+    internal class CommonData
+    {
+        #region Constructors
 
-		/// <summary>
-		/// Hide constructor
-		/// </summary>
-		private CommonData()
-		{
-		}
-		#endregion
+        /// <summary>
+        /// Hide constructor
+        /// </summary>
+        private CommonData()
+        {
+        }
+        #endregion
 
         #region Public methods
         /// <summary>
@@ -57,13 +57,13 @@ namespace BigMansStuff.Common
         {
             if ( m_diagnosticsMode.Enabled )
             {
-                System.Diagnostics.Trace.WriteLine( diagnosticsMessage ) ;
+                System.Diagnostics.Trace.WriteLine( diagnosticsMessage );
             }
         }
         #endregion
 
         #region Private members
-        private static BooleanSwitch m_diagnosticsMode = new BooleanSwitch( "LocusEffectsDiagnostics", "Control LocusEffects Diagnostics Mode" ) ;
+        private static BooleanSwitch m_diagnosticsMode = new BooleanSwitch( "LocusEffectsDiagnostics", "Control LocusEffects Diagnostics Mode" );
         #endregion
-	}
+    }
 }
