@@ -36,7 +36,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BigMan's Stuff")]
 [assembly: AssemblyProduct("Locus Effects")]
-[assembly: AssemblyCopyright("© 2006 Yuval Naveh")]
+[assembly: AssemblyCopyright("© 2005 Yuval Naveh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
