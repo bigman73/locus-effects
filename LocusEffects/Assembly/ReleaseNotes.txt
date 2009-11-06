@@ -1,3 +1,6 @@
+04/28/2009 - 2.0.0.1
+License changed to LGPL V3.
+
 04/18/2009 - 2.0.0.0
 Changed: Ported code to .NET 2.0 (Solution, Generics)
 Improved: Documentation, Sandcastle used instead of NDoc
