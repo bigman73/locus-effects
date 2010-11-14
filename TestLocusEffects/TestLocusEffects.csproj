@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.50727</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A90FD769-746C-4024-8566-4D60DDE17150}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -87,10 +87,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BigMansStuff.LocusEffects">
-      <Name>BigMansStuff.LocusEffects</Name>
-      <HintPath>..\LocusEffects\bin\Debug\BigMansStuff.LocusEffects.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -133,6 +129,12 @@
     <Content Include="Images\CurvedArrow.png" />
     <Content Include="Images\LookHereBulb.png" />
     <Content Include="Images\RobinHoodArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocusEffects\LocusEffects.csproj">
+      <Project>{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}</Project>
+      <Name>LocusEffects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
