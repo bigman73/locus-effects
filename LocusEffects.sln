@@ -1,5 +1,5 @@
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual C# Express 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLocusEffects", "TestLocusEffects\TestLocusEffects.csproj", "{A90FD769-746C-4024-8566-4D60DDE17150}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C} = {B31C2C9E-C8E5-4C83-B2FF-A996AD9DB80C}
