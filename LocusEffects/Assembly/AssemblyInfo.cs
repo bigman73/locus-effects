@@ -29,10 +29,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BigMan's Stuff")]
 [assembly: AssemblyProduct("Locus Effects")]
-[assembly: AssemblyCopyright("© 2005,2009 Yuval Naveh")]
+[assembly: AssemblyCopyright("© 2005,2012 Yuval Naveh")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
-[assembly: AssemblyVersion("2.0.0.2")]
+[assembly: AssemblyVersion("2.0.0.3")]
 
 [assembly: AssemblyDelaySign(false)]

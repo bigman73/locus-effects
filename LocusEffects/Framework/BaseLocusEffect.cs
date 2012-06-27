@@ -508,10 +508,13 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         private void SubscribeActivatorFormEvents()
         {
-            m_runTimeData.ActivatorForm.LocationChanged += new EventHandler( activatorForm_LocationChanged );
-            m_runTimeData.ActivatorForm.Closed += new EventHandler( activatorForm_Closed );
-            m_runTimeData.ActivatorForm.VisibleChanged += new EventHandler( activatorForm_VisibleChanged );
-            m_runTimeData.ActivatorForm.Deactivate += new EventHandler( ActivatorForm_Deactivate );
+            if (m_runTimeData.ActivatorForm != null)
+            {
+                m_runTimeData.ActivatorForm.LocationChanged += new EventHandler(activatorForm_LocationChanged);
+                m_runTimeData.ActivatorForm.Closed += new EventHandler(activatorForm_Closed);
+                m_runTimeData.ActivatorForm.VisibleChanged += new EventHandler(activatorForm_VisibleChanged);
+                m_runTimeData.ActivatorForm.Deactivate += new EventHandler(ActivatorForm_Deactivate);
+            }
         }
 
         /// <summary>
@@ -519,10 +522,13 @@ namespace BigMansStuff.LocusEffects
         /// </summary>
         private void UnsubscribeActivatorFormEvents()
         {
-            m_runTimeData.ActivatorForm.LocationChanged -= new EventHandler( activatorForm_LocationChanged );
-            m_runTimeData.ActivatorForm.Closed -= new EventHandler( activatorForm_Closed );
-            m_runTimeData.ActivatorForm.VisibleChanged -= new EventHandler( activatorForm_VisibleChanged );
-            m_runTimeData.ActivatorForm.Deactivate -= new EventHandler( ActivatorForm_Deactivate );
+            if (m_runTimeData.ActivatorForm != null)
+            {
+                m_runTimeData.ActivatorForm.LocationChanged -= new EventHandler(activatorForm_LocationChanged);
+                m_runTimeData.ActivatorForm.Closed -= new EventHandler(activatorForm_Closed);
+                m_runTimeData.ActivatorForm.VisibleChanged -= new EventHandler(activatorForm_VisibleChanged);
+                m_runTimeData.ActivatorForm.Deactivate -= new EventHandler(ActivatorForm_Deactivate);
+            }
         }
 
         /// <summary>
@@ -535,7 +541,8 @@ namespace BigMansStuff.LocusEffects
             {
                 m_owner.EffectWindow.SetEffect( this );
 
-                m_runTimeData.LastActivatorFormBounds = m_runTimeData.ActivatorForm.Bounds;
+                if ( m_runTimeData.ActivatorForm != null )
+                    m_runTimeData.LastActivatorFormBounds = m_runTimeData.ActivatorForm.Bounds;
                 m_runTimeData.StepMaxDuration = 1000.0f / m_owner.FramesPerSecond;
 
                 this.SubscribeActivatorFormEvents();

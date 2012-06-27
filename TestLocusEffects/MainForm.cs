@@ -627,12 +627,12 @@ namespace BigMansStuff.TestLocusEffects
         /// <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
         private void showScreenButton_Click( object sender, EventArgs e )
         {
-            int x = Convert.ToInt32( xTextBox.Text );
+            int x = Convert.ToInt32(xTextBox.Text);
             int y = Convert.ToInt32( yTextBox.Text );
             System.Drawing.Rectangle locusRect = new Rectangle( x, y, 1, 1 );
 
             // Show the selected locus effect
-            locusEffectsProvider.ShowLocusEffect( this, locusRect, m_activeLocusEffectName );
+            locusEffectsProvider.ShowLocusEffect( null, locusRect, m_activeLocusEffectName );
         }
 
         /// <summary>
