@@ -55,6 +55,7 @@ namespace BigMansStuff.TestLocusEffects
             this.searchTabPage = new System.Windows.Forms.TabPage();
             this.textBoxPanel = new System.Windows.Forms.Panel();
             this.screenTabPage = new System.Windows.Forms.TabPage();
+            this.demoControl = new System.Windows.Forms.TextBox();
             this.showForControlButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.showScreenButton = new System.Windows.Forms.Button();
@@ -77,7 +78,7 @@ namespace BigMansStuff.TestLocusEffects
             this.textRadioButton = new System.Windows.Forms.RadioButton();
             this.customTextRadioButton = new System.Windows.Forms.RadioButton();
             this.locusEffectsProvider = new BigMansStuff.LocusEffects.LocusEffectsProvider(this.components);
-            this.demoControl = new System.Windows.Forms.TextBox();
+            this.hideButton = new System.Windows.Forms.Button();
             this.searchPanel.SuspendLayout();
             this.tabControlPanel.SuspendLayout();
             this.mainTabControl.SuspendLayout();
@@ -332,6 +333,7 @@ namespace BigMansStuff.TestLocusEffects
             // 
             // screenTabPage
             // 
+            this.screenTabPage.Controls.Add(this.hideButton);
             this.screenTabPage.Controls.Add(this.demoControl);
             this.screenTabPage.Controls.Add(this.showForControlButton);
             this.screenTabPage.Controls.Add(this.label3);
@@ -347,6 +349,14 @@ namespace BigMansStuff.TestLocusEffects
             this.screenTabPage.TabIndex = 4;
             this.screenTabPage.Text = "Example - Misc";
             this.screenTabPage.UseVisualStyleBackColor = true;
+            // 
+            // demoControl
+            // 
+            this.demoControl.Location = new System.Drawing.Point(67, 137);
+            this.demoControl.Name = "demoControl";
+            this.demoControl.Size = new System.Drawing.Size(100, 20);
+            this.demoControl.TabIndex = 8;
+            this.demoControl.Text = "Demo Control";
             // 
             // showForControlButton
             // 
@@ -572,13 +582,15 @@ namespace BigMansStuff.TestLocusEffects
             this.customTextRadioButton.Text = "Full Screen Text (Center Monitor)";
             this.customTextRadioButton.Click += new System.EventHandler(this.customTextRadioButton_CheckedChanged);
             // 
-            // demoControl
+            // hideButton
             // 
-            this.demoControl.Location = new System.Drawing.Point(67, 137);
-            this.demoControl.Name = "demoControl";
-            this.demoControl.Size = new System.Drawing.Size(100, 20);
-            this.demoControl.TabIndex = 8;
-            this.demoControl.Text = "Demo Control";
+            this.hideButton.Location = new System.Drawing.Point(209, 65);
+            this.hideButton.Name = "hideButton";
+            this.hideButton.Size = new System.Drawing.Size(120, 23);
+            this.hideButton.TabIndex = 9;
+            this.hideButton.Text = "Hide and Show Effect";
+            this.hideButton.UseVisualStyleBackColor = true;
+            this.hideButton.Click += new System.EventHandler(this.hideButton_Click);
             // 
             // MainForm
             // 
@@ -662,5 +674,6 @@ namespace BigMansStuff.TestLocusEffects
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button showForControlButton;
         private System.Windows.Forms.TextBox demoControl;
+        private System.Windows.Forms.Button hideButton;
     }
 }

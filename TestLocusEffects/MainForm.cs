@@ -643,6 +643,24 @@ namespace BigMansStuff.TestLocusEffects
         private void showForControlButton_Click(object sender, EventArgs e)
         {
             locusEffectsProvider.ShowLocusEffect(demoControl, m_activeLocusEffectName);
+        }
+
+        private void hideButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            int x = Convert.ToInt32(xTextBox.Text);
+            int y = Convert.ToInt32(yTextBox.Text);
+            System.Drawing.Rectangle locusRect = new Rectangle(x, y, 1, 1);
+
+            // Show the selected locus effect
+            locusEffectsProvider.ShowLocusEffect(null, locusRect, m_activeLocusEffectName);
+
+            for (int i = 0; i < 400; i++)
+            {
+                System.Threading.Thread.Sleep(5);
+                Application.DoEvents();
+            }
+            this.Close();
         }      
       
     }
