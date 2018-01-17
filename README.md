@@ -7,4 +7,9 @@ I was first introduced to the term "Locus" almost an year ago, when I attended a
 Locus - Latin for "the place."
 
 # Code Project Article
+Documentation of the design can be found in:
 https://www.codeproject.com/Articles/10879/Locus-Effects
+
+
+# License 
+License: ![alt LGPLV3](https://www.gnu.org/graphics/lgplv3-147x51.png)
