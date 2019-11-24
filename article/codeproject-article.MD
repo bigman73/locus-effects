@@ -131,8 +131,7 @@ The framework is built from a few core classes. LocusEffectsProvider is the main
       {
           throw new ApplicationException( 
              string.Format( 
-               "Could not show locus effect, 
-                '{0}' is not registered", locusEffectName ));
+               "Could not show locus effect, '{0}' is not registered", locusEffectName ));
       }
 
       this.InternalStopActiveLocusEffect();
@@ -410,8 +409,16 @@ Concrete effect classes can override AnimateEffect and provide their own concret
 The framework is quite heavily documented, and uses NDoc to generated a compiled HTML file (LocusEffects.chm) which is provided with the project and includes documentation for each class, its methods and properties.
 
 ## Things I have learned
-Performance
+### Performance
 Performance in GDI+, .NET and Windows Forms can be very slow. GDI+ itself is slower than GDI, and is (currently) not accelerated by graphics cards. All the processing is done in CPU time. Windows Forms is a very productive wrapper around Win API but it is heavy and has a lot of implementation issues which are slow, because the framework is generic. One specific thing to note is the usage of Bitmaps. Bitmaps in Win Forms are wrappers to GDI+ Bitmaps. This is all OK, however when you try to move from a GDI+ Bitmap to a regular GDI Bitmap you need a handle (HBITMAP). Calling GetHBitmap() is going to work but with a heavy price. The image is copied to a new GDI Bitmap and then the handle is returned to that new GDI bitmap. This is slow. Add to this a call of SelectObject into the Device Context each time, and it is slow too. Finally, UpdateLayeredWindow is also slow by nature. (See MSDN help about it.)
 So what I have done (using Lou Amadio's help) is I have created a DIBSection manually, and selected it into the Device Context once. Now when I render the bitmap in ApplyGraphics I use Graphics.FromHDC(). This API is fast because GDI+ detects that the Device Context is attached to a DIBSection underneath and it uses directly without an intermediate buffer. Using Graphics.FromBitmap() is slow as it creates an intermediate buffer! Beware!
 
-Layered Windows - These cool creatures are nice but slow. Empiric tests show that bitmaps over 300x300 start to clog your CPU. So it does not mean that large Locus Effects cannot be used, but there is a small price to it. Until Microsoft does not improve that API to make it much faster, there is nothing that can be done on that subject. Luckily most Locus Effects are smaller than this size, so there is no big problem.
+### Layered Windows
+These cool creatures are nice but slow. Empiric tests show that bitmaps over 300x300 start to clog your CPU. So it does not mean that large Locus Effects cannot be used, but there is a small price to it. Until Microsoft does not improve that API to make it much faster, there is nothing that can be done on that subject. Luckily most Locus Effects are smaller than this size, so there is no big problem.
+
+## Conclusion
+This is my first article – I’ve been a CodeProject member for a long time, but finally I found the idea, time (and guts...) to write my own article and contribute something back to this really great community. The idea in this article is not new, but when I looked for such an implementation in the web (CodeProject too) there was nothing that was ready, so I decided to write it. There are no limits to imagination and new cool effects and ideas can be added easily to the framework.
+
+The project is written in Visual Studio .NET 2003, I have not provided solutions for the older Visual Studio .NET format, but it should work on the older Visual Studio .NET with minor modifications. Visual Studio .NET 2005 (Beta 2) was tested and works fine. Also notice that the APIs used here require Windows 2000 and above. It will not work on Win9X, WinNT! These old operating systems do not support Layered Windows.
+
+If anyone extends the framework and adds new effects, please send me the extension so that I can make it a part of the next version of the framework. Oh, and if you like it, use it, if you have any ideas on how to improve it or just have any comment - please tell me.
